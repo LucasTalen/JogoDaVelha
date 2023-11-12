@@ -143,7 +143,7 @@ function Reiniciar()
 }
 // ------------------------------------------------------
 
-
+token = criarToken()
 
 
 function criarToken(){

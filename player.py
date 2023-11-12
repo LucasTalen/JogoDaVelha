@@ -4,16 +4,16 @@ player = {}
 
 
 
-def verificar_codigo(codigo):
-    if codigo in codigo_multiplay:
-        ...
+# def verificar_codigo(codigo):
+#     if codigo in codigo_multiplay:
+#         ...
 
 
 def conectar_multiplay():
     ...
 
 
-criar_codigo_multiplayer()
+# criar_codigo_multiplayer()
 
 
 
