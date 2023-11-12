@@ -9,8 +9,8 @@
 </head>
 
 <body>
-    <h1>Jogo Da Velha</h1>
-    <div id="borderimg">
+    <div id="jogo_da_velha">
+        <h1>Jogo Da Velha</h1>
         <div>
             <div id="1" class="Quadrado button1" onclick="EscolherQuadrado(this.id)">-</div>
             <div id="2" class="Quadrado button1" onclick="EscolherQuadrado(this.id)">-</div>
@@ -40,6 +40,8 @@
         </div>
 
         <div>
+            <button onclick="criarMultiplay()">Criar Uma Sala Multiplay</button>
+            <button onclick="logarMultiplay()">Entrar Em Uma Sala Multiplay</button>
             <button class="button button11" onclick="Reiniciar()">Reiniciar</button>
         </div>
     </div>

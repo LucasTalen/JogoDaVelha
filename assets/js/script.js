@@ -4,6 +4,8 @@ let JogadorSelecionado = document.getElementById('JogadorSelecionado');
 let VencedorSelecionado = document.getElementById('VencedorSelecionado');
 
 
+
+
 MudarJogador('X');
 
 function EscolherQuadrado(id) 
@@ -138,4 +140,54 @@ function ChecaSequencia(Quadrado1, Quadrado2, Quadrado3)
 function Reiniciar()
 {   
     location.reload();
+}
+// ------------------------------------------------------
+
+
+
+
+function criarToken(){
+    token =  Math.random().toString(20).substring(2);
+}
+
+function criarMultiplay(){
+    codigo = criarCodigoMultiplay()
+    criarSala(codigo)
+}
+function criarCodigoMultiplay(){
+    return Math.random().toString(10).substring(10);
+}
+function criarSala(codigo){
+    
+    const apiUrl = `https://upright-filly-upward.ngrok-free.app/api/jogo_da_velha/${token}/multiplay/?codigo=${url}/criar_sala`;
+    fetch(apiUrl, {
+        headers: {
+            'ngrok-skip-browser-warning': 'true'
+        }
+    })
+        .then(response => response.text())
+        .then(data => {
+            console.log(data)
+            
+        })
+        .catch(error => {
+            console.error('Ocorreu um erro ao consumir a API:', error);
+        });
+}
+function entrarSala(codigo){
+    
+    const apiUrl = `https://upright-filly-upward.ngrok-free.app/api/jogo_da_velha/${token}/multiplay/?codigo=${url}/entrar_sala`;
+    fetch(apiUrl, {
+        headers: {
+            'ngrok-skip-browser-warning': 'true'
+        }
+    })
+        .then(response => response.text())
+        .then(data => {
+            console.log(data)
+            
+        })
+        .catch(error => {
+            console.error('Ocorreu um erro ao consumir a API:', error);
+        });
 }
