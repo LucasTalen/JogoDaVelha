@@ -1,6 +1,31 @@
+html, body {
+    height: 100%;
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */  
+    /* width: 1vh;
+    height: 1vh; */
+}
 body {
-    display: block;
-    background-color: #dde2b9;
+    
+    background-image: url("../img/1.gif");
+    
+    background-repeat: no-repeat;
+    width: 100%;
+    background-position: top;
+    background-size: cover;
+}
+.velha{
+    margin-bottom: 15%;
+}
+label{
+    color: white;
+}
+.Jogador{
+    text-align: center;
+}
+#JogoDaVelha {
+  position: relative;
+  text-align: center;
 }
 
 #jogo_da_velha {
@@ -14,6 +39,8 @@ body {
     font-size: 50px;
     margin: 5px;
     cursor: pointer;
+    color: rgb(230, 216, 216);
+    background-color: rgb(17, 63, 63); 
     color: white;
     text-decoration: none;
     transition-duration: 0.7s;
@@ -25,7 +52,7 @@ body {
 }
 
 .button {
-    background-color: #4CAF50;
+    background-color: rgb(17, 63, 63);
     border: none;
     color: white;
     padding: 16px 32px;
@@ -36,37 +63,58 @@ body {
     margin: 4px 2px;
     transition-duration: 0.7s;
     cursor: pointer;
-}
 
-.button1, .button11 {
-    border: 2px solid #4CAF50;
+
+
+  }
+
+.button{
+    opacity: 0.7;
 }
 
 .button1 {
-    background-color: rgb(230, 216, 216);
-    color: rgb(230, 216, 216);
+    background-color: rgb(230, 216, 216); 
+    color: rgb(230, 216, 216); 
+    border: 2px solid rgb(17, 63, 63);
 }
-
-.button11, .button1:hover {
-    background-color: white;
-    color: black;
+.button11 {
+    background-color: white; 
+    color: black; 
+    border: 2px solid rgb(17, 63, 63);
 }
-
-.button1:hover, .button11:hover {
-    background-color: #4CAF50;
+.button1:hover {
+    background-color: rgb(17, 63, 63);
     color: white;
 }
+.button11:hover {
+    background-color: rgb(17, 63, 63);
+    color: white;
+  }
+  label{
+    opacity: 0.6;
+  }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width:900px ) {
+    body{
+        max-height: 850px;
+        max-width: 450px;
+    }
     .Quadrado {
-        width: 20%;
+        text-align: center;
+        width: 60px;
+        background: rgb(23, 94, 94);
+        color: rgb(23, 94, 94);
         display: inline-block;
-        padding: 40px;
+        padding: 15px;
         font-size: 50px;
-        margin: 5px;
         cursor: pointer;
-        color: white;
         text-decoration: none;
         transition-duration: 0.7s;
+        opacity: 0.8;
+    }
+    #JogoDaVelha{
+        margin-top: 15%;
+
+        text-align: center;
     }
 }
