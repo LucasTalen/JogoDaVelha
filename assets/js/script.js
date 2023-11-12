@@ -159,7 +159,7 @@ function criarCodigoMultiplay(){
 }
 function criarSala(codigo){
     
-    const apiUrl = `https://upright-filly-upward.ngrok-free.app/api/jogo_da_velha/${token}/multiplay/?codigo=${url}/criar_sala`;
+    const apiUrl = `https://upright-filly-upward.ngrok-free.app/api/jogo_da_velha/${token}/multiplay/?codigo=${codigo}/criar_sala`;
     fetch(apiUrl, {
         headers: {
             'ngrok-skip-browser-warning': 'true'
