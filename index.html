@@ -1,48 +1,44 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 
-<head>
-    <title>Jogo Da Velha</title>
-    <meta charset="UTF-8">
-   
-    <link rel="stylesheet" href="assets/css/style.css">
-</head>
-
-<body>
-    <h1>Jogo Da Velha</h1>
-    <div id="borderimg">
-        <div>
-            <div id="1" class="Quadrado button1" onclick="EscolherQuadrado(this.id)">-</div>
-            <div id="2" class="Quadrado button1" onclick="EscolherQuadrado(this.id)">-</div>
-            <div id="3" class="Quadrado button1" onclick="EscolherQuadrado(this.id)">-</div>
+    <head>
+        <title>Jogo Da Velha</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="assets/css/style.css">
+        
+    </head>
+    
+    <body>
+        <div id="JogoDaVelha">
+            <h1 style="color: white;">Jogo Da Velha</h1>
+            <div class="velha">
+            <div>
+                <div id="1" class="Quadrado button1" onclick="EscolherQuadrado(this.id)">-</div>
+                <div id="2" class="Quadrado button1" onclick="EscolherQuadrado(this.id)">-</div>
+                <div id="3" class="Quadrado button1" onclick="EscolherQuadrado(this.id)">-</div>
+            <br>
+                <div id="4" class="Quadrado button1" onclick="EscolherQuadrado(this.id)">-</div>
+                <div id="5" class="Quadrado button1" onclick="EscolherQuadrado(this.id)">-</div>
+                <div id="6" class="Quadrado button1" onclick="EscolherQuadrado(this.id)">-</div>
+            <br>
+                <div id="7" class="Quadrado button1" onclick="EscolherQuadrado(this.id)">-</div>
+                <div id="8" class="Quadrado button1" onclick="EscolherQuadrado(this.id)">-</div>
+                <div id="9" class="Quadrado button1" onclick="EscolherQuadrado(this.id)">-</div>
+            </div>
         </div>
-
-        <div>
-            <div id="4" class="Quadrado button1" onclick="EscolherQuadrado(this.id)">-</div>
-            <div id="5" class="Quadrado button1" onclick="EscolherQuadrado(this.id)">-</div>
-            <div id="6" class="Quadrado button1" onclick="EscolherQuadrado(this.id)">-</div>
+            <div class="Jogador">
+                <label>Jogador:</label>
+                <label id="JogadorSelecionado"></label>
+            </div>
+            <div class="Vencedor">
+                <label>Vencedor:</label>
+                <label id="VencedorSelecionado"></label>
+            </div> 
+            <div>
+                <button class="button button11" onclick="Reiniciar()">Reiniciar</button>
+            </div>
         </div>
-
-        <div>
-            <div id="7" class="Quadrado button1" onclick="EscolherQuadrado(this.id)">-</div>
-            <div id="8" class="Quadrado button1" onclick="EscolherQuadrado(this.id)">-</div>
-            <div id="9" class="Quadrado button1" onclick="EscolherQuadrado(this.id)">-</div>
-        </div>
-
-        <div class="Jogador">
-            <label>Jogador:</label>
-            <label id="JogadorSelecionado"></label>
-        </div>
-
-        <div class="Vencedor">
-            <label>Vencedor:</label>
-            <label id="VencedorSelecionado"></label>
-        </div>
-
-        <div>
-            <button class="button button11" onclick="Reiniciar()">Reiniciar</button>
-        </div>
-    </div>
         <script src="assets/js/script.js"></script>
     </body>
 </html>
