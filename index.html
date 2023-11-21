@@ -12,21 +12,21 @@
     <h1>Jogo Da Velha</h1>
     <div id="JogoDaVelha">
         <div>
+            <div id="0" class="Quadrado button1" onclick="EscolherQuadrado(this.id)">-</div>
             <div id="1" class="Quadrado button1" onclick="EscolherQuadrado(this.id)">-</div>
             <div id="2" class="Quadrado button1" onclick="EscolherQuadrado(this.id)">-</div>
-            <div id="3" class="Quadrado button1" onclick="EscolherQuadrado(this.id)">-</div>
         </div>
 
         <div>
+            <div id="3" class="Quadrado button1" onclick="EscolherQuadrado(this.id)">-</div>
             <div id="4" class="Quadrado button1" onclick="EscolherQuadrado(this.id)">-</div>
             <div id="5" class="Quadrado button1" onclick="EscolherQuadrado(this.id)">-</div>
-            <div id="6" class="Quadrado button1" onclick="EscolherQuadrado(this.id)">-</div>
         </div>
 
         <div>
+            <div id="6" class="Quadrado button1" onclick="EscolherQuadrado(this.id)">-</div>
             <div id="7" class="Quadrado button1" onclick="EscolherQuadrado(this.id)">-</div>
             <div id="8" class="Quadrado button1" onclick="EscolherQuadrado(this.id)">-</div>
-            <div id="9" class="Quadrado button1" onclick="EscolherQuadrado(this.id)">-</div>
         </div>
 
         <div class="Jogador">
@@ -40,11 +40,46 @@
         </div>
 
         <div>
-            <button onclick="criarMultiplay()">Criar Uma Sala Multiplay</button>
-            <button onclick="logarMultiplay()">Entrar Em Uma Sala Multiplay</button>
-            <button class="button button11" onclick="Reiniciar()">Reiniciar</button>
+            <button id="ButtonModalCriarSalas">Criar Salas</button>
+            <button id="ButtonModalVerSalas">Ver Salas</button>
+
+            <button class="button button11" onclick="window.location.reload()">Reiniciar</button>
         </div>
     </div>
-        <script src="assets/js/script.js"></script>
-    </body>
+
+<div id="ModalCriarSala" class="modal">
+
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h3>Criar Sala</h3>
+    
+        <div>
+        <label for="nomeSala">Nome Da Sala:</label>
+        <input id="inputSala" type="text" name="nomeSala" required><br>
+        </div>
+        <div>
+        <label for="senhaSala">Senha Da Sala:</label>
+        <input id="inputSenha" type="password" name="senhaSala" required>
+        </div>
+        <div>
+            <button id="btnCriarSala">Criar Sala</button>
+        </div>
+    
+  </div>
+
+</div>
+
+<div id="ModalVerSala" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h3>Sala</h3>
+      <div id="salas"></div>
+    </div>
+    
+</div>
+
+<script src="assets/js/script.js"></script>
+<script src="assets/js/modal.js"></script>
+</body>
 </html>

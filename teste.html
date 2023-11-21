@@ -1,0 +1,54 @@
+// HTML
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Jogo da Velha</title>
+    <style>
+        .board {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 10px;
+            width: 300px;
+            height: 300px;
+            margin: 0 auto;
+        }
+
+        .cell {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            background-color: #f2f2f2;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="board">
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+    </div>
+
+    <script>
+        const cells = document.querySelectorAll('.cell');
+        let currentPlayer = 'X';
+
+        cells.forEach(cell => {
+            cell.addEventListener('click', () => {
+                if (cell.textContent === '') {
+                    cell.textContent = currentPlayer;
+                    currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

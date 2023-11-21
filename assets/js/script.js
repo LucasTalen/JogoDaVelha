@@ -2,114 +2,62 @@ let Jogador = null;
 let Vencedor = null;
 let JogadorSelecionado = document.getElementById('JogadorSelecionado');
 let VencedorSelecionado = document.getElementById('VencedorSelecionado');
-
-
-
+var verificar;
 
 MudarJogador('X');
 
-function EscolherQuadrado(id) 
-{
-    if (Vencedor !== null) 
-    {
-        return;
+function EscolherQuadrado(id) {
+    realizarAcao(token,id)
+    if (Vencedor || document.getElementById(id).innerHTML !== '-') return ;
+    if(verificar){
+        console.log('entrei')
+        verificar = false
+        document.getElementById(id).innerHTML = Jogador;
+        document.getElementById(id).style.color = 'black';
+
+        Jogador = (Jogador === 'X') ? 'O' : 'X';
+
+        MudarJogador(Jogador);
+        checaVencedor();
+        // document.getElementById(id).setAttribute('onclick', false);
+    }else{
+        console.log("Jogada invalida", verificar)
     }
-
-    let Quadrado = document.getElementById(id);
-    if (Quadrado.innerHTML !== '-') 
-    {
-        return;
-    }
-
-    Quadrado.innerHTML = Jogador;
-    Quadrado.style.color = 'black';
-
-    if (Jogador === 'X') 
-    {
-        Jogador = 'O';
-    } 
-    else 
-    {
-        Jogador = 'X';
-    }
-
-    MudarJogador(Jogador);
-    checaVencedor();
 }
 
+
 function MudarJogador(Valor) 
-{
+{   
     Jogador = Valor;
     JogadorSelecionado.innerHTML = Jogador;
 }
 
-function checaVencedor()
-{
-    let Quadrado1 = document.getElementById(1);
-    let Quadrado2 = document.getElementById(2);
-    let Quadrado3 = document.getElementById(3);
-    let Quadrado4 = document.getElementById(4);
-    let Quadrado5 = document.getElementById(5);
-    let Quadrado6 = document.getElementById(6);
-    let Quadrado7 = document.getElementById(7);
-    let Quadrado8 = document.getElementById(8);
-    let Quadrado9 = document.getElementById(9);
+function checaVencedor() {
+    const sequencias = [
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 9],
+        [1, 4, 7],
+        [2, 5, 8],
+        [3, 6, 9],
+        [1, 5, 9],
+        [3, 5, 7]
+    ];
 
-    if (ChecaSequencia(Quadrado1, Quadrado2, Quadrado3)) 
-    {
-        MudaCorQuadrado(Quadrado1, Quadrado2, Quadrado3);
-        MudarVencedor(Quadrado1);
-        return;
-    }
+    for (const sequencia of sequencias) {
+        const [a, b, c] = sequencia;
+        const quadradoA = document.getElementById(a);
+        const quadradoB = document.getElementById(b);
+        const quadradoC = document.getElementById(c);
 
-    if (ChecaSequencia(Quadrado4, Quadrado5, Quadrado6)) 
-    {
-        MudaCorQuadrado(Quadrado4, Quadrado5, Quadrado6);
-        MudarVencedor(Quadrado4);
-        return;
-    }
-
-    if (ChecaSequencia(Quadrado7, Quadrado8, Quadrado9)) 
-    {
-        MudaCorQuadrado(Quadrado7, Quadrado8, Quadrado9);
-        MudarVencedor(Quadrado7);
-        return;
-    }
-
-    if (ChecaSequencia(Quadrado1, Quadrado4, Quadrado7)) 
-    {
-        MudaCorQuadrado(Quadrado1, Quadrado4, Quadrado7);
-        MudarVencedor(Quadrado1);
-        return;
-    }
-
-    if (ChecaSequencia(Quadrado2, Quadrado5, Quadrado8)) 
-    {
-        MudaCorQuadrado(Quadrado2, Quadrado5, Quadrado8);
-        MudarVencedor(Quadrado2);
-        return;
-    }
-
-    if (ChecaSequencia(Quadrado3, Quadrado6, Quadrado9)) 
-    {
-        MudaCorQuadrado(Quadrado3, Quadrado6, Quadrado9);
-        MudarVencedor(Quadrado3);
-        return;
-    }
-
-    if (ChecaSequencia(Quadrado1, Quadrado5, Quadrado9)) 
-    {
-        MudaCorQuadrado(Quadrado1, Quadrado5, Quadrado9);
-        MudarVencedor(Quadrado1);
-        return;
-    }
-
-    if (ChecaSequencia(Quadrado3, Quadrado5, Quadrado7)) 
-    {
-        MudaCorQuadrado(Quadrado3, Quadrado5, Quadrado7);
-        MudarVencedor(Quadrado3);
+        if (ChecaSequencia(quadradoA, quadradoB, quadradoC)) {
+            MudaCorQuadrado(quadradoA, quadradoB, quadradoC);
+            MudarVencedor(quadradoA);
+            return;
+        }
     }
 }
+
 
 function MudarVencedor(Quadrado) 
 {
@@ -127,52 +75,42 @@ function MudaCorQuadrado(Quadrado1, Quadrado2, Quadrado3)
 
 function ChecaSequencia(Quadrado1, Quadrado2, Quadrado3) 
 {
-    let EIgual = false;
-
-    if (Quadrado1.innerHTML !== '-' && Quadrado1.innerHTML === Quadrado2.innerHTML && Quadrado2.innerHTML === Quadrado3.innerHTML) 
-    {
-        EIgual = true;
-    }
-
-    return EIgual;
+    return Quadrado1.innerHTML !== '-' && Quadrado1.innerHTML === Quadrado2.innerHTML && Quadrado2.innerHTML === Quadrado3.innerHTML;
 }
 
-function Reiniciar()
-{   
-    location.reload();
-}
+
 // ------------------------------------------------------
 
-token = criarToken()
+var token = criarToken()
 
 
 function criarToken(){
-    token =  Math.random().toString(20).substring(2);
+    return Math.random().toString(20).substring(2);
 }
 
-function criarMultiplay(){
-    codigo = criarCodigoMultiplay()
-    criarSala(codigo)
-}
+
 function criarCodigoMultiplay(){
     return Math.random().toString(10).substring(10);
 }
-function criarSala(codigo){
+function criarSala(codigo,nomeSala,senhaSala){
     
-    const apiUrl = `https://upright-filly-upward.ngrok-free.app/api/jogo_da_velha/${token}/multiplay/criar_sala/?codigo=${codigo}`;
-    fetch(apiUrl, {
-        headers: {
-            'ngrok-skip-browser-warning': 'true'
-        }
+    const baseUrl = 'https://upright-filly-upward.ngrok-free.app/api/jogo_da_velha';
+    const endpoint = `multiplay/criar_sala/${nomeSala}/${senhaSala}/?codigo=${codigo}`;
+    const apiUrl = `${baseUrl}/${token}/${endpoint}`;
+
+    const headers = {
+    'ngrok-skip-browser-warning': 'true'
+    };
+
+    fetch(apiUrl, { headers })
+    .then(response => response.text())
+    .then(data => {
+        console.log(data);
     })
-        .then(response => response.text())
-        .then(data => {
-            console.log(data)
-            
-        })
-        .catch(error => {
-            console.error('Ocorreu um erro ao consumir a API:', error);
-        });
+    .catch(error => {
+        console.error('Ocorreu um erro ao consumir a API:', error);
+    });
+
 }
 function entrarSala(codigo){
     
@@ -190,4 +128,98 @@ function entrarSala(codigo){
         .catch(error => {
             console.error('Ocorreu um erro ao consumir a API:', error);
         });
+}
+
+function MostrarSala(){
+    var modalSala = document.getElementById('salas');
+    
+        const apiUrl = `https://upright-filly-upward.ngrok-free.app/api/jogo_da_velha/${token}/multiplay/mostrar_sala`;
+        fetch(apiUrl, {
+            headers: {
+                'ngrok-skip-browser-warning': 'true'
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                
+                for(var salas in data) {
+                    modalSala.innerHTML += `
+                    <div class="player-container">
+                        <span class="player-name">${data[salas]['nome']}</span>
+                        <span>1/2</span>
+                        <i class="lock-icon">🔒</i>
+                    </div>
+                    `
+                }
+                
+                
+            })
+            .catch(error => {
+                console.error('Ocorreu um erro ao consumir a API:', error);
+            });
+ 
+    
+}
+
+
+
+
+
+
+// ----------------------------------
+
+function state(){
+    var matrix_de_quadrados = []
+    var estado = document.getElementsByClassName('Quadrado');
+    for(var i = 0; i < estado.length; i++) {
+        matrix_de_quadrados.push(estado[i].textContent)
+    }
+    var jogador_atual = document.getElementById('JogadorSelecionado').textContent
+    return {matrix:matrix_de_quadrados, jogador:jogador_atual}
+}
+
+function realizarAcao(token,acao){
+    var estado = state()
+    const baseUrl = 'https://upright-filly-upward.ngrok-free.app/api/jogo_da_velha';
+    const endpoint = `fazer_acao/${token}/${[estado.matrix]}/${estado.jogador}/${acao}`;
+    const apiUrl = `${baseUrl}/${endpoint}`;
+
+    const headers = {
+    'ngrok-skip-browser-warning': 'true'
+    };
+
+    fetch(apiUrl, { headers })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data.data, '|', typeof(data.data), '| function');
+        // alert(data.data)
+        verificar = data.data;
+        console.log('fetch', verificar)
+    })
+    .catch(error => {
+        console.error('Ocorreu um erro ao consumir a API:', error);
+        return false;
+    });
+
+}
+
+function acao(codigo,nomeSala,senhaSala){
+    
+    const baseUrl = 'https://upright-filly-upward.ngrok-free.app/api/jogo_da_velha';
+    const endpoint = `teste/${codigo}`;
+    const apiUrl = `${baseUrl}/${token}/${endpoint}`;
+
+    const headers = {
+    'ngrok-skip-browser-warning': 'true'
+    };
+
+    fetch(apiUrl, { headers })
+    .then(response => response.text())
+    .then(data => {
+        console.log(data);
+    })
+    .catch(error => {
+        console.error('Ocorreu um erro ao consumir a API:', error);
+    });
+
 }
