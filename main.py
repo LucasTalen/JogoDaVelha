@@ -18,15 +18,18 @@ def criarSala(token,nomeSala,senhaSala):
         salas[codigo]['nome'] = nomeSala
         salas[codigo]['senha'] = senhaSala
         salas[codigo]['jogador1'] = token
-
+    print(salas)
     return 'succes'
 
-@app.route('/api/jogo_da_velha/<token>/multiplay/entrar_sala', methods=['GET'])
+@app.route('/api/jogo_da_velha/<token>/multiplay/entrar_sala/', methods=['GET'])
 def entrarSala(token):
     codigo = request.args.get('codigo')
+    salas[codigo]['jogador2'] = token
     # if codigo is salas:
     #     return 'succes'
-    return 'False'
+
+    
+    return 'True'
 
 @app.route('/api/jogo_da_velha/<token>/multiplay/mostrar_sala', methods=['GET'])
 def mostrarSala(token):
@@ -34,7 +37,8 @@ def mostrarSala(token):
 
 @app.route('/api/jogo_da_velha/fazer_acao/<token>/<lista>/<jogador_atual>/<acao>', methods=['GET'])
 def fazerAcao(token,lista,jogador_atual,acao):
-    jogadorAtual = {token: jogador_atual}
+    if not jogadorAtual:
+        jogadorAtual = {token: jogador_atual}
     lista1 = lista.split(',')
     # print(token, jogador_atual, lista1, acao)
     # print(type(lista1))

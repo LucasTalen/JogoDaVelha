@@ -1,3 +1,4 @@
+var quantidade_de_sala = 0
 let Jogador = null;
 let Vencedor = null;
 let JogadorSelecionado = document.getElementById('JogadorSelecionado');
@@ -113,8 +114,8 @@ function criarSala(codigo,nomeSala,senhaSala){
 
 }
 function entrarSala(codigo){
-    
-    const apiUrl = `https://upright-filly-upward.ngrok-free.app/api/jogo_da_velha/${token}/multiplay/entrar_sala/?codigo=${url}`;
+    console.log("passou aqui")
+    const apiUrl = `https://upright-filly-upward.ngrok-free.app/api/jogo_da_velha/${token}/multiplay/entrar_sala/?codigo=${codigo}`;
     fetch(apiUrl, {
         headers: {
             'ngrok-skip-browser-warning': 'true'
@@ -143,11 +144,13 @@ function MostrarSala(){
             .then(data => {
                 
                 for(var salas in data) {
+                    console.log(salas)
                     modalSala.innerHTML += `
                     <div class="player-container">
                         <span class="player-name">${data[salas]['nome']}</span>
                         <span>1/2</span>
                         <i class="lock-icon">🔒</i>
+                        <button id=${salas} onclick='entrarSala(this.id)'>Entrar</button>
                     </div>
                     `
                 }
