@@ -1,11 +1,67 @@
 var quantidade_de_sala = 0
+var salaAtual = ' ';
 let Jogador = null;
 let Vencedor = null;
 let JogadorSelecionado = document.getElementById('JogadorSelecionado');
 let VencedorSelecionado = document.getElementById('VencedorSelecionado');
 var verificar;
+function atualizarTela(lista) {
 
-MudarJogador('X');
+    const quadrados = document.getElementsByClassName('Quadrado');
+    console.log('lista '+lista.length)
+    console.log('quadrado '+quadrados.length)
+
+    if (quadrados.length !== lista.length) {
+        console.error('Tamanho da lista e número de quadrados não coincidem.');
+        return;
+    }
+
+    for (let i = 0; i < lista.length; i++) {
+        quadrados[i].textContent = lista[i];
+    }
+}
+
+
+
+var intevalo = setInterval(function() {
+    atualizar_lista()
+    if (checaVencedor()){
+        clearInterval(intevalo)
+        
+    }
+    
+}, 1000);
+
+function atualizar_lista(){
+    const baseUrl = 'https://upright-filly-upward.ngrok-free.app/api/jogo_da_velha';
+    const endpoint = `multiplay/mostrar_estado/${salaAtual}`;
+    const apiUrl = `${baseUrl}/${endpoint}`;
+
+    const headers = {
+    'ngrok-skip-browser-warning': 'true'
+    };
+
+    fetch(apiUrl, { headers })
+    .then(response => response.json())
+    .then(data => {
+        console.log(typeof(data))
+        atualizarTela(data);
+    })
+    .catch(error => {
+        console.error('Ocorreu um erro ao consumir a API:', error);
+    });
+
+
+}
+
+
+
+
+
+
+
+
+//MudarJogador('X');
 
 function EscolherQuadrado(id) {
     realizarAcao(token,id)
@@ -16,9 +72,9 @@ function EscolherQuadrado(id) {
         document.getElementById(id).innerHTML = Jogador;
         document.getElementById(id).style.color = 'black';
 
-        Jogador = (Jogador === 'X') ? 'O' : 'X';
+        //Jogador = (Jogador === 'X') ? 'O' : 'X';
 
-        MudarJogador(Jogador);
+       // MudarJogador(Jogador);
         checaVencedor();
         // document.getElementById(id).setAttribute('onclick', false);
     }else{
@@ -27,22 +83,22 @@ function EscolherQuadrado(id) {
 }
 
 
-function MudarJogador(Valor) 
-{   
-    Jogador = Valor;
-    JogadorSelecionado.innerHTML = Jogador;
-}
+//function MudarJogador(Valor) 
+//{   
+   // Jogador = Valor;
+    //JogadorSelecionado.innerHTML = Jogador;
+//}
 
 function checaVencedor() {
     const sequencias = [
-        [1, 2, 3],
-        [4, 5, 6],
-        [7, 8, 9],
-        [1, 4, 7],
-        [2, 5, 8],
-        [3, 6, 9],
-        [1, 5, 9],
-        [3, 5, 7]
+        [0, 1, 2], // Primeira linha
+        [3, 4, 5], // Segunda linha
+        [6, 7, 8], // Terceira linha
+        [0, 3, 6], // Primeira coluna
+        [1, 4, 7], // Segunda coluna
+        [2, 5, 8], // Terceira coluna
+        [0, 4, 8], // Diagonal principal
+        [2, 4, 6]  // Diagonal secundária
     ];
 
     for (const sequencia of sequencias) {
@@ -54,7 +110,7 @@ function checaVencedor() {
         if (ChecaSequencia(quadradoA, quadradoB, quadradoC)) {
             MudaCorQuadrado(quadradoA, quadradoB, quadradoC);
             MudarVencedor(quadradoA);
-            return;
+            return true;
         }
     }
 }
@@ -94,7 +150,9 @@ function criarCodigoMultiplay(){
     return Math.random().toString(10).substring(10);
 }
 function criarSala(codigo,nomeSala,senhaSala){
-    
+    salaAtual = codigo
+
+
     const baseUrl = 'https://upright-filly-upward.ngrok-free.app/api/jogo_da_velha';
     const endpoint = `multiplay/criar_sala/${nomeSala}/${senhaSala}/?codigo=${codigo}`;
     const apiUrl = `${baseUrl}/${token}/${endpoint}`;
@@ -114,6 +172,7 @@ function criarSala(codigo,nomeSala,senhaSala){
 
 }
 function entrarSala(codigo){
+    salaAtual = codigo
     console.log("passou aqui")
     const apiUrl = `https://upright-filly-upward.ngrok-free.app/api/jogo_da_velha/${token}/multiplay/entrar_sala/?codigo=${codigo}`;
     fetch(apiUrl, {
@@ -177,14 +236,14 @@ function state(){
     for(var i = 0; i < estado.length; i++) {
         matrix_de_quadrados.push(estado[i].textContent)
     }
-    var jogador_atual = document.getElementById('JogadorSelecionado').textContent
-    return {matrix:matrix_de_quadrados, jogador:jogador_atual}
+    //var jogador_atual = document.getElementById('JogadorSelecionado').textContent
+    return {matrix:matrix_de_quadrados}// , jogador:jogador_atual
 }
 
 function realizarAcao(token,acao){
     var estado = state()
     const baseUrl = 'https://upright-filly-upward.ngrok-free.app/api/jogo_da_velha';
-    const endpoint = `fazer_acao/${token}/${[estado.matrix]}/${estado.jogador}/${acao}`;
+    const endpoint = `fazer_acao/${token}/${[estado.matrix]}/${acao}`;
     const apiUrl = `${baseUrl}/${endpoint}`;
 
     const headers = {
@@ -194,6 +253,7 @@ function realizarAcao(token,acao){
     fetch(apiUrl, { headers })
     .then(response => response.json())
     .then(data => {
+        console.log(data)
         console.log(data.data, '|', typeof(data.data), '| function');
         // alert(data.data)
         verificar = data.data;

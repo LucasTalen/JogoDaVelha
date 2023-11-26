@@ -2,6 +2,7 @@ from player import realizar_jogada
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
+
 app = Flask(__name__)
 CORS(app)
 
@@ -10,14 +11,14 @@ salas = {}
 @app.route('/api/jogo_da_velha/<token>/multiplay/criar_sala/<nomeSala>/<senhaSala>/', methods=['GET'])
 def criarSala(token,nomeSala,senhaSala):
     codigo = request.args.get('codigo')
-    # print(codigo)
-    # print('---------')
-    # print(token)
+ 
     if not codigo is salas:
         salas[codigo] = {}
         salas[codigo]['nome'] = nomeSala
         salas[codigo]['senha'] = senhaSala
+        salas[codigo]['estado'] = ['-','-','-','-','-','-','-','-','-']
         salas[codigo]['jogador1'] = token
+        salas[codigo]['jogador1-X_ou_O'] = 'X'
     print(salas)
     return 'succes'
 
@@ -25,9 +26,10 @@ def criarSala(token,nomeSala,senhaSala):
 def entrarSala(token):
     codigo = request.args.get('codigo')
     salas[codigo]['jogador2'] = token
-    # if codigo is salas:
-    #     return 'succes'
+    salas[codigo]['jogador2-X_ou_O'] = 'O'
 
+    print(salas)
+ 
     
     return 'True'
 
@@ -35,17 +37,43 @@ def entrarSala(token):
 def mostrarSala(token):
     return jsonify(salas) 
 
-@app.route('/api/jogo_da_velha/fazer_acao/<token>/<lista>/<jogador_atual>/<acao>', methods=['GET'])
-def fazerAcao(token,lista,jogador_atual,acao):
-    if not jogadorAtual:
-        jogadorAtual = {token: jogador_atual}
+@app.route('/api/jogo_da_velha/fazer_acao/<token>/<lista>/<acao>', methods=['GET'])
+def fazerAcao(token,lista,acao):
+
+
+    for codigo in salas:
+        
+        if salas[codigo]['jogador1'] == token:
+            vez = salas[codigo]['jogador1-X_ou_O']
+        elif salas[codigo]['jogador2'] == token:
+            vez = salas[codigo]['jogador2-X_ou_O']
+
     lista1 = lista.split(',')
-    # print(token, jogador_atual, lista1, acao)
-    # print(type(lista1))
-    realiza = realizar_jogada(token, jogadorAtual, int(acao), lista1)
-    # print(lista1)
+
+    realiza = realizar_jogada(token, vez, int(acao), lista1)
+
     print(realiza)
-    return {"data": realiza}                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+    if realiza:
+        if salas[codigo]['jogador1'] == token:
+            print(salas[codigo]['estado'][int(acao)])
+            salas[codigo]['estado'][int(acao)] = 'X'
+        elif salas[codigo]['jogador2'] == token:
+            print(salas[codigo]['estado'][int(acao)])
+
+            salas[codigo]['estado'][int(acao)] = 'O'
+
+
+    return {"data": realiza}   
+
+
+
+@app.route('/api/jogo_da_velha/multiplay/mostrar_estado/<salaAtual>', methods=['GET'])
+def atualizarEstado(salaAtual):
+    estado = salas[salaAtual]['estado']
+    print(estado)
+    return estado
+
+
 
 app.run(debug=True,port=80)
 
@@ -53,4 +81,3 @@ app.run(debug=True,port=80)
 
 
 
-#  const apiUrl = `https://upright-filly-upward.ngrok-free.app/api/${token}/?url=${url}`;

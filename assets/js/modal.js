@@ -34,9 +34,8 @@ btnCriarSala.onclick = () => {
     
 
     criarSala(codigo, Sala, Senha)
-
-    alert(Sala)
-    alert(Senha)
+    modal.style.display = "none";
+    
 }
 
 
