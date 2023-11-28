@@ -1,3 +1,4 @@
+
 var quantidade_de_sala = 0
 var salaAtual = ' ';
 let Jogador = null;
