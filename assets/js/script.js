@@ -5,11 +5,13 @@ let Vencedor = null;
 let JogadorSelecionado = document.getElementById('JogadorSelecionado');
 let VencedorSelecionado = document.getElementById('VencedorSelecionado');
 var verificar;
+var estar_em_sala = false
+
+
 function atualizarTela(lista) {
 
     const quadrados = document.getElementsByClassName('Quadrado');
-    console.log('lista '+lista.length)
-    console.log('quadrado '+quadrados.length)
+
 
     if (quadrados.length !== lista.length) {
         console.error('Tamanho da lista e número de quadrados não coincidem.');
@@ -24,10 +26,12 @@ function atualizarTela(lista) {
 
 
 var intevalo = setInterval(function() {
-    atualizar_lista()
-    if (checaVencedor()){
-        clearInterval(intevalo)
-        
+    if (estar_em_sala){
+        atualizar_lista()
+        if (checaVencedor()){
+            clearInterval(intevalo)
+            
+        }
     }
     
 }, 1000);
@@ -59,10 +63,6 @@ function atualizar_lista(){
 
 
 
-
-
-//MudarJogador('X');
-
 function EscolherQuadrado(id) {
     realizarAcao(token,id)
     if (Vencedor || document.getElementById(id).innerHTML !== '-') return ;
@@ -72,33 +72,23 @@ function EscolherQuadrado(id) {
         document.getElementById(id).innerHTML = Jogador;
         document.getElementById(id).style.color = 'black';
 
-        //Jogador = (Jogador === 'X') ? 'O' : 'X';
-
-       // MudarJogador(Jogador);
+  
         checaVencedor();
-        // document.getElementById(id).setAttribute('onclick', false);
     }else{
         console.log("Jogada invalida", verificar)
     }
 }
 
-
-//function MudarJogador(Valor) 
-//{   
-   // Jogador = Valor;
-    //JogadorSelecionado.innerHTML = Jogador;
-//}
-
 function checaVencedor() {
     const sequencias = [
-        [0, 1, 2], // Primeira linha
-        [3, 4, 5], // Segunda linha
-        [6, 7, 8], // Terceira linha
-        [0, 3, 6], // Primeira coluna
-        [1, 4, 7], // Segunda coluna
-        [2, 5, 8], // Terceira coluna
-        [0, 4, 8], // Diagonal principal
-        [2, 4, 6]  // Diagonal secundária
+        [0, 1, 2], 
+        [3, 4, 5], 
+        [6, 7, 8], 
+        [0, 3, 6], 
+        [1, 4, 7], 
+        [2, 5, 8], 
+        [0, 4, 8], 
+        [2, 4, 6]  
     ];
 
     for (const sequencia of sequencias) {
@@ -150,6 +140,10 @@ function criarCodigoMultiplay(){
     return Math.random().toString(10).substring(10);
 }
 function criarSala(codigo,nomeSala,senhaSala){
+    if(estar_em_sala){
+        alert("Você Já Estar Em Uma Sala!\n Reinicie Para Criar Outra Sala")
+        return
+    }
     salaAtual = codigo
 
 
@@ -164,6 +158,7 @@ function criarSala(codigo,nomeSala,senhaSala){
     fetch(apiUrl, { headers })
     .then(response => response.text())
     .then(data => {
+        estar_em_sala = true
         console.log(data);
     })
     .catch(error => {
@@ -172,6 +167,10 @@ function criarSala(codigo,nomeSala,senhaSala){
 
 }
 function entrarSala(codigo){
+    if(estar_em_sala){
+        alert("Você Já Estar Em Uma Sala!\n Reinicie Para Criar Outra Sala")
+        return
+    }
     salaAtual = codigo
     console.log("passou aqui")
     const apiUrl = `https://upright-filly-upward.ngrok-free.app/api/jogo_da_velha/${token}/multiplay/entrar_sala/?codigo=${codigo}`;
@@ -183,6 +182,7 @@ function entrarSala(codigo){
         .then(response => response.text())
         .then(data => {
             console.log(data)
+            estar_em_sala = true
             
         })
         .catch(error => {
