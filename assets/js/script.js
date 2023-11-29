@@ -140,7 +140,7 @@ function criarToken(){
 function criarCodigoMultiplay(){
     return Math.random().toString(10).substring(10);
 }
-function criarSala(codigo,nomeSala,senhaSala){
+function criarSala(codigo,nomeSala){
     if(estar_em_sala){
         alert("Você Já Estar Em Uma Sala!\n Reinicie Para Criar Outra Sala")
         return
@@ -267,7 +267,7 @@ function realizarAcao(token,acao){
 
 }
 
-function acao(codigo,nomeSala,senhaSala){
+function acao(codigo){
     
     const baseUrl = 'https://upright-filly-upward.ngrok-free.app/api/jogo_da_velha';
     const endpoint = `teste/${codigo}`;

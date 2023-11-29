@@ -29,11 +29,10 @@ var btnCriarSala = document.getElementById("btnCriarSala");
 btnCriarSala.onclick = () => {
   
     var Sala = document.getElementById("inputSala").value
-    var Senha = document.getElementById("inputSenha").value
     var codigo = criarCodigoMultiplay()
     
 
-    criarSala(codigo, Sala, Senha)
+    criarSala(codigo, Sala)
     modal.style.display = "none";
     
 }
