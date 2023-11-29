@@ -8,27 +8,25 @@ CORS(app)
 
 salas = {}
 
-@app.route('/api/jogo_da_velha/<token>/multiplay/criar_sala/<nomeSala>/<senhaSala>/', methods=['GET'])
-def criarSala(token,nomeSala,senhaSala):
+@app.route('/api/jogo_da_velha/<token>/multiplay/criar_sala/<nomeSala>/', methods=['GET'])
+def criarSala(token,nomeSala):
     codigo = request.args.get('codigo')
   
     if not codigo is salas:
         salas[codigo] = {}
         salas[codigo]['nome'] = nomeSala
-        salas[codigo]['senha'] = senhaSala
         salas[codigo]['estado'] = ['-','-','-','-','-','-','-','-','-']
         salas[codigo]['jogador1'] = token
         salas[codigo]['jogador1-X_ou_O'] = 'X'
+        salas[codigo]['primeiro_jogador'] = '-'
     print(salas)
     return 'succes'
 
 @app.route('/api/jogo_da_velha/<token>/multiplay/entrar_sala/', methods=['GET'])
 def entrarSala(token):
-
     codigo = request.args.get('codigo')
     salas[codigo]['jogador2'] = token
     salas[codigo]['jogador2-X_ou_O'] = 'O'
-
     print(salas)
     return 'True'
 

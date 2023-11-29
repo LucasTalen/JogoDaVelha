@@ -149,7 +149,7 @@ function criarSala(codigo,nomeSala,senhaSala){
 
 
     const baseUrl = 'https://upright-filly-upward.ngrok-free.app/api/jogo_da_velha';
-    const endpoint = `multiplay/criar_sala/${nomeSala}/${senhaSala}/?codigo=${codigo}`;
+    const endpoint = `multiplay/criar_sala/${nomeSala}/?codigo=${codigo}`;
     const apiUrl = `${baseUrl}/${token}/${endpoint}`;
 
     const headers = {

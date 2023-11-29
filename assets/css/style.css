@@ -1,9 +1,7 @@
 html, body {
     height: 100%;
-    margin: 0; /* Remove default margin */
-    padding: 0; /* Remove default padding */  
-    /* width: 1vh;
-    height: 1vh; */
+    margin: 0; 
+    padding: 0; 
 }
 body {
     
