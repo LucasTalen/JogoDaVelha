@@ -8,7 +8,7 @@ let VencedorSelecionado = document.getElementById('VencedorSelecionado');
 var verificar;
 var estar_em_sala = false
 var audio = document.getElementById('music-fundo')
-audio.volume = 0.2
+audio.volume = 0.5
 
 
 
