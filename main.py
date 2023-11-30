@@ -19,6 +19,7 @@ def criarSala(token,nomeSala):
         salas[codigo]['jogador1'] = token
         salas[codigo]['jogador1-X_ou_O'] = 'X'
         salas[codigo]['ultima_jogada'] = '-'
+        salas[codigo]['quantidade'] = 1
     print(salas)
     return 'succes'
 
@@ -27,6 +28,7 @@ def entrarSala(token):
     codigo = request.args.get('codigo')
     salas[codigo]['jogador2'] = token
     salas[codigo]['jogador2-X_ou_O'] = 'O'
+    salas[codigo]['quantidade'] = 2
     print(salas)
     return 'True'
 

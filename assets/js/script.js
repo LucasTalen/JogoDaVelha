@@ -13,7 +13,6 @@ function atualizarTela(lista) {
 
     const quadrados = document.getElementsByClassName('Quadrado');
 
-
     if (quadrados.length !== lista.length) {
         console.error('Tamanho da lista e número de quadrados não coincidem.');
         return;
@@ -35,7 +34,7 @@ var intevalo = setInterval(function() {
         }
     }
     
-}, 1000);
+}, 1500);
 
 function atualizar_lista(){
     const baseUrl = 'https://upright-filly-upward.ngrok-free.app/api/jogo_da_velha';
@@ -167,9 +166,13 @@ function criarSala(codigo,nomeSala){
     });
 
 }
-function entrarSala(codigo){
+function entrarSala(codigo,quantidade_na_sala){
     if(estar_em_sala){
         alert("Você Já Estar Em Uma Sala!\n Reinicie Para Criar Outra Sala")
+        return
+    }
+    else if (quantidade_na_sala > 1){
+        alert("Sala Cheia")
         return
     }
     salaAtual = codigo
@@ -202,15 +205,18 @@ function MostrarSala(){
         })
             .then(response => response.json())
             .then(data => {
-                
                 for(var salas in data) {
-                    console.log(salas)
+                    if (data[salas]['quantidade'] == 2) {
+                        var emoji = "🔒"
+                    }else{
+                        var emoji = "🔓"
+                    }
                     modalSala.innerHTML += `
                     <div class="player-container">
                         <span class="player-name">${data[salas]['nome']}</span>
-                        <span>1/2</span>
-                        <i class="lock-icon">🔒</i>
-                        <button id=${salas} onclick='entrarSala(this.id)'>Entrar</button>
+                        <span>${data[salas]['quantidade']}/2</span>
+                        <i class="lock-icon">${emoji}</i>
+                        <button id=${salas} onclick='entrarSala(this.id,${data[salas]['quantidade']})'>Entrar</button>
                     </div>
                     `
                 }
@@ -237,8 +243,7 @@ function state(){
     for(var i = 0; i < estado.length; i++) {
         matrix_de_quadrados.push(estado[i].textContent)
     }
-    //var jogador_atual = document.getElementById('JogadorSelecionado').textContent
-    return {matrix:matrix_de_quadrados}// , jogador:jogador_atual
+    return {matrix:matrix_de_quadrados}
 }
 
 function realizarAcao(token,acao){
