@@ -9,20 +9,7 @@ var verificar;
 var estar_em_sala = false
 var audio = document.getElementById('music-fundo')
 audio.volume = 0.2
-
-
-
-if(localStorage.getItem('musica') === null) {
-    console.log('oi')
-    localStorage.setItem('musica', '0');
-} else {
-    localStorage.clear()
-}
-
-if (localStorage.getItem('musica') == '0'){
-    alert('poi')
-    window.location.reload()
-}
+audio.play()
 
 
 
