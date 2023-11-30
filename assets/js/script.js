@@ -13,12 +13,16 @@ audio.volume = 0.2
 
 
 if(localStorage.getItem('musica') === null) {
+    console.log('oi')
     localStorage.setItem('musica', '0');
-    window.location.reload()
 } else {
     localStorage.clear()
 }
 
+if (localStorage.getItem('musica') == '0'){
+    alert('poi')
+    window.location.reload()
+}
 
 
 
