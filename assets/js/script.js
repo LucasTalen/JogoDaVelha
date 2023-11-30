@@ -9,7 +9,6 @@ var verificar;
 var estar_em_sala = false
 var audio = document.getElementById('music-fundo')
 audio.volume = 0.2
-audio.play()
 
 
 
@@ -143,7 +142,9 @@ var token = criarToken()
 
 
 function criarToken(){
+    audio.play()
     return Math.random().toString(20).substring(2);
+
 }
 
 
