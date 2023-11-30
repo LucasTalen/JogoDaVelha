@@ -10,6 +10,25 @@ var estar_em_sala = false
 var audio = document.getElementById('music-fundo')
 audio.volume = 0.2
 
+
+
+if(localStorage.getItem('musica') === null) {
+    localStorage.setItem('musica', '0');
+    window.location.reload()
+} else {
+    localStorage.clear()
+}
+
+
+
+
+
+
+
+
+
+
+
 function atualizarTela(lista) {
 
     const quadrados = document.getElementsByClassName('Quadrado');
