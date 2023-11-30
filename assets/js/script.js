@@ -161,6 +161,7 @@ function criarSala(codigo,nomeSala){
     .then(data => {
         estar_em_sala = true
         console.log(data);
+        alert('Voce criou uma sala com sucesso!')
     })
     .catch(error => {
         console.error('Ocorreu um erro ao consumir a API:', error);
@@ -184,6 +185,7 @@ function entrarSala(codigo){
         .then(data => {
             console.log(data)
             estar_em_sala = true
+            alert("Voce entrou na sala")
             
         })
         .catch(error => {
