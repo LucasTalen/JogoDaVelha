@@ -8,13 +8,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.3.2/socket.io.js"></script>
     <link rel="stylesheet" href="assets/css/style.css">
 
-        <audio id="music-fundo" loop>
-            <source src="./assets/music/1.mp3" type="audio/mpeg">
-          </audio>
-        
-                  
-          
-          
+    
+    
           
 </head>
 
@@ -27,62 +22,67 @@
             <div id="1" class="Quadrado button1" onclick="EscolherQuadrado(this.id)">-</div>
             <div id="2" class="Quadrado button1" onclick="EscolherQuadrado(this.id)">-</div>
         </div>
-
+        
         <div>
             <div id="3" class="Quadrado button1" onclick="EscolherQuadrado(this.id)">-</div>
             <div id="4" class="Quadrado button1" onclick="EscolherQuadrado(this.id)">-</div>
             <div id="5" class="Quadrado button1" onclick="EscolherQuadrado(this.id)">-</div>
         </div>
-
+        
         <div>
             <div id="6" class="Quadrado button1" onclick="EscolherQuadrado(this.id)">-</div>
             <div id="7" class="Quadrado button1" onclick="EscolherQuadrado(this.id)">-</div>
             <div id="8" class="Quadrado button1" onclick="EscolherQuadrado(this.id)">-</div>
         </div>
-
+        
         <div class="Vencedor">
             <label>Vencedor:</label>
             <label id="VencedorSelecionado"></label>
         </div><br>
-
+        
         <div>
             <button id="ButtonModalCriarSalas" class="button button11">Criar Salas</button>
             <button id="ButtonModalVerSalas" class="button button11">Ver Salas</button>
-
+            
             <button class="button button11" onclick="window.location.reload()">Reiniciar</button>
         </div>
     </div>
-
-<div id="ModalCriarSala" class="modal">
-
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <h3>Criar Sala</h3>
     
-        <div>
-        <label for="nomeSala">Nome Da Sala:</label>
-        <input id="inputSala" type="text" name="nomeSala" required><br>
+    <div id="ModalCriarSala" class="modal">
+        
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Criar Sala</h3>
+            
+            <div>
+                <label for="nomeSala">Nome Da Sala:</label>
+                <input id="inputSala" type="text" name="nomeSala" required><br>
+            </div>
+            
+            <div>
+                <button id="btnCriarSala">Criar Sala</button>
+            </div>
+            
         </div>
-    
-        <div>
-            <button id="btnCriarSala">Criar Sala</button>
-        </div>
-    
-  </div>
-
-</div>
-
-<div id="ModalVerSala" class="modal">
-    <!-- Modal content -->
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <h3>Sala</h3>
-      <div id="salas"></div>
+        
     </div>
     
-</div>
-
-<script src="assets/js/script.js"></script>
-<script src="assets/js/modal.js"></script>
+    <div id="ModalVerSala" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Sala</h3>
+            <div id="salas"></div>
+        </div>
+        
+    </div>
+    
+    <audio id="music-fundo" loop>
+        <source src="./assets/music/1.mp3" type="audio/mpeg">
+      </audio>
+    
+              
+    <script src="assets/js/script.js"></script>
+    <script src="assets/js/modal.js"></script>
 </body>
 </html>
