@@ -1,12 +1,20 @@
 from player import realizar_jogada
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
+
 
 
 app = Flask(__name__)
 CORS(app)
 
 salas = {}
+
+@app.route('/jogo_da_velha')
+def site():
+    return render_template('index.html')
+
+
+
 
 @app.route('/api/jogo_da_velha/<token>/multiplay/criar_sala/<nomeSala>/', methods=['GET'])
 def criarSala(token,nomeSala):
